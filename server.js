@@ -17,6 +17,10 @@ app.use(bodyParser.urlencoded({extended: true, parameterLimit: 100000, limit: '5
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({extended: true}));
 
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+}
+
 let time; //testing
 let cuisine; //testing
 
@@ -31,6 +35,9 @@ io.on("connection", socket => {
     res.json(final);
   })
 
+  app.get('*', (req,res) => {
+    res.send("sup");
+  });
 
   app.post('/', async (req,res) => {
     console.log("Made a POST request within io connection")
