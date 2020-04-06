@@ -17,20 +17,19 @@ app.use(bodyParser.urlencoded({extended: true, parameterLimit: 100000, limit: '5
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({extended: true}));
 
-
-
 let time; //testing
 let cuisine; //testing
 
 var final = [];
+
 if (process.env.NODE_ENV === 'production') {
-	res.json(final)
+	app.use(express.static('index.html'));
 }
 
 io.on("connection", socket => {
   console.log("a user connected :D");
   
-  app.get('/', function (req, res) {
+  app.get('https://cryptic-mesa-78638.herokuapp.com/', function (req, res) {
     res.send(PORT)
     console.log("Made a GET request within io connection")
     res.json(final);
@@ -40,7 +39,7 @@ io.on("connection", socket => {
     res.send("sup");
   });
 
-  app.post('/', async (req,res) => {
+  app.post('https://cryptic-mesa-78638.herokuapp.com/', async (req,res) => {
     console.log("Made a POST request within io connection")
 
     const { intolerances, pantry, allergies, diet } = req.body.data.profileState['_55'];
