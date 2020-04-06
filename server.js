@@ -17,14 +17,15 @@ app.use(bodyParser.urlencoded({extended: true, parameterLimit: 100000, limit: '5
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({extended: true}));
 
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'));
-}
+
 
 let time; //testing
 let cuisine; //testing
 
 var final = [];
+if (process.env.NODE_ENV === 'production') {
+	res.json(final)
+}
 
 io.on("connection", socket => {
   console.log("a user connected :D");
