@@ -26,6 +26,7 @@ io.on("connection", socket => {
   console.log("a user connected :D");
   
   app.get('/', function (req, res) {
+    res.send(PORT)
     console.log("Made a GET request within io connection")
     res.json(final);
   })
