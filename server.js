@@ -4,7 +4,7 @@ const app = express()
 const PORT = process.env.PORT;
   if (PORT === null || PORT === "") {
     PORT = 8000
-  }
+  };
 const bodyParser = require("body-parser");
 const server = require("http").createServer(app);
 const io = require("socket.io").listen(server);
